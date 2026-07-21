@@ -127,10 +127,11 @@ opacity:1;
 }
 
 #truck{
-    width:100px;
     position:absolute;
-    left:0;
-    top:0;
+    width:60px;
+    z-index:100;
+    transition:none;
+    transform-origin:center center;
 }
 
 /* Home */
