@@ -1,19 +1,56 @@
 const splash = document.getElementById("splash");
-const animation = document.getElementById("animation");
+const main = document.getElementById("main");
 
 const truck = document.getElementById("truck");
 
-window.addEventListener("load", () => {
+const routes = [
+    document.getElementById("r1"),
+    document.getElementById("r2"),
+    document.getElementById("r3"),
+    document.getElementById("r4"),
+    document.getElementById("r5"),
+    document.getElementById("r6")
+];
 
-    setTimeout(() => {
+const cities = [
+    document.getElementById("c1"),
+    document.getElementById("c2"),
+    document.getElementById("c3"),
+    document.getElementById("c4"),
+    document.getElementById("c5"),
+    document.getElementById("c6"),
+    document.getElementById("c7")
+];
 
-        splash.style.opacity = "0";
-        splash.style.transition = "1s";
+const points = [
 
-        setTimeout(() => {
+    {x:140,y:120},
 
-            splash.style.display = "none";
-            animation.style.display = "block";
+    {x:260,y:220},
+
+    {x:180,y:320},
+
+    {x:420,y:260},
+
+    {x:380,y:420},
+
+    {x:470,y:500},
+
+    {x:700,y:180}
+
+];
+
+window.onload=function(){
+
+    setTimeout(()=>{
+
+        splash.style.opacity="0";
+
+        setTimeout(()=>{
+
+            splash.style.display="none";
+
+            main.style.display="block";
 
             startAnimation();
 
@@ -21,63 +58,95 @@ window.addEventListener("load", () => {
 
     },3000);
 
-});
+}
 
+function moveTruck(from,to,callback){
 
-function startAnimation(){
+    let x=from.x;
 
-    const svg = document.getElementById("indiaMap");
+    let y=from.y;
 
-    svg.addEventListener("load", ()=>{
+    const dx=(to.x-from.x)/100;
 
-        const svgDoc = svg.contentDocument;
+    const dy=(to.y-from.y)/100;
 
-        const polygon = svgDoc.getElementById("indiaPolygon");
+    const angle=Math.atan2(
+        to.y-from.y,
+        to.x-from.x
+    )*180/Math.PI;
 
-        const points = polygon.points;
+    truck.style.transform=
+    `translate(-50%,-50%) rotate(${angle}deg)`;
 
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
+    let step=0;
 
-        let progress = 0;
+    const timer=setInterval(()=>{
 
-        function animate(){
+        x+=dx;
 
-            progress += 2;
+        y+=dy;
 
-            if(progress > length){
+        truck.style.left=x+"px";
+        truck.style.top=y+"px";
 
-                path.style.strokeDashoffset = 0;
+        step++;
 
-                return;
-            }
+        if(step>=100){
 
-            path.style.strokeDashoffset = length - progress;
+            clearInterval(timer);
 
-            const point = path.getPointAtLength(progress);
-
-            truck.style.left = point.x + "px";
-            truck.style.top = point.y + "px";
-
-            const next = path.getPointAtLength(
-                Math.min(progress + 1, length)
-            );
-
-            const angle =
-                Math.atan2(
-                    next.y - point.y,
-                    next.x - point.x
-                ) * 180 / Math.PI;
-
-            truck.style.transform =
-                `translate(-50%,-50%) rotate(${angle}deg)`;
-
-            requestAnimationFrame(animate);
+            callback();
 
         }
 
-        animate();
+    },15);
 
-    });
+}
+
+function startAnimation(){
+
+    truck.style.left=points[0].x+"px";
+    truck.style.top=points[0].y+"px";
+
+    cities[0].classList.add("active");
+
+    let i=0;
+
+    function next(){
+
+        if(i>=routes.length){
+
+            document
+            .getElementById("done")
+            .style.opacity=1;
+
+            return;
+        }
+
+        routes[i].classList.add("draw");
+
+        moveTruck(
+
+            points[i],
+
+            points[i+1],
+
+            ()=>{
+
+                cities[i+1]
+                .classList
+                .add("active");
+
+                i++;
+
+                next();
+
+            }
+
+        );
+
+    }
+
+    next();
 
 }
