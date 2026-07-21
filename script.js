@@ -1,31 +1,21 @@
-/* ======================================
-   TRUCK MAP DEMO
-   SHUBH LABH DISTRIBUTIONS
-====================================== */
-
 const splash = document.getElementById("splash");
 const animation = document.getElementById("animation");
-const home = document.getElementById("home");
 
-// Truck
 const truck = document.getElementById("truck");
 
-// Wait for page to load
 window.addEventListener("load", () => {
 
-    // Show splash for 3 seconds
     setTimeout(() => {
 
         splash.style.opacity = "0";
-        splash.style.transition = "opacity 1s";
+        splash.style.transition = "1s";
 
         setTimeout(() => {
 
             splash.style.display = "none";
-
             animation.style.display = "block";
 
-            startTruckAnimation();
+            startAnimation();
 
         },1000);
 
@@ -34,54 +24,60 @@ window.addEventListener("load", () => {
 });
 
 
-function startTruckAnimation(){
+function startAnimation(){
 
-    let x = -120;
-    let y = 280;
+    const svg = document.getElementById("indiaMap");
 
-    truck.style.left = x + "px";
-    truck.style.top = y + "px";
+    svg.addEventListener("load", ()=>{
 
-    const move = setInterval(()=>{
+        const svgDoc = svg.contentDocument;
 
-        x += 3;
+        const path = svgDoc.getElementById("indiaPath");
 
-        truck.style.left = x + "px";
+        const length = path.getTotalLength();
 
-        // End animation
-        if(x > window.innerWidth){
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
 
-            clearInterval(move);
+        let progress = 0;
 
-            setTimeout(showHome,1500);
+        function animate(){
+
+            progress += 2;
+
+            if(progress > length){
+
+                path.style.strokeDashoffset = 0;
+
+                return;
+            }
+
+            path.style.strokeDashoffset = length - progress;
+
+            const point = path.getPointAtLength(progress);
+
+            truck.style.left = point.x + "px";
+            truck.style.top = point.y + "px";
+
+            const next = path.getPointAtLength(
+                Math.min(progress + 1, length)
+            );
+
+            const angle =
+                Math.atan2(
+                    next.y - point.y,
+                    next.x - point.x
+                ) * 180 / Math.PI;
+
+            truck.style.transform =
+                `translate(-50%,-50%) rotate(${angle}deg)`;
+
+            requestAnimationFrame(animate);
 
         }
 
-    },16);
+        animate();
 
-}
-
-
-function showHome(){
-
-    animation.style.opacity = "0";
-    animation.style.transition = "opacity 1s";
-
-    setTimeout(()=>{
-
-        animation.style.display="none";
-
-        home.style.display="block";
-
-        home.style.opacity="0";
-
-        setTimeout(()=>{
-
-            home.style.transition="opacity 1s";
-            home.style.opacity="1";
-
-        },100);
-
-    },1000);
+    });
 
 }
