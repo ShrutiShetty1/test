@@ -2,6 +2,7 @@ const splash = document.getElementById("splash");
 const main = document.getElementById("main");
 
 const truck = document.getElementById("truck");
+const done = document.getElementById("done");
 
 const routes = [
     document.getElementById("r1"),
@@ -23,130 +24,108 @@ const cities = [
 ];
 
 const points = [
-
     {x:140,y:120},
-
     {x:260,y:220},
-
-    {x:180,y:320},
-
-    {x:420,y:260},
-
-    {x:380,y:420},
-
-    {x:470,y:500},
-
-    {x:700,y:180}
-
+    {x:180,y:340},
+    {x:430,y:260},
+    {x:380,y:430},
+    {x:500,y:500},
+    {x:720,y:170}
 ];
 
-window.onload=function(){
+window.onload = () => {
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        splash.style.opacity="0";
+        splash.style.opacity = "0";
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
-            splash.style.display="none";
+            splash.style.display = "none";
+            main.style.display = "block";
 
-            main.style.display="block";
+            truck.style.left = points[0].x + "px";
+            truck.style.top = points[0].y + "px";
 
-            startAnimation();
+            cities[0].classList.add("active");
+
+            animateRoute(0);
 
         },1000);
 
     },3000);
 
+};
+
+function animateRoute(index){
+
+    if(index >= routes.length){
+
+        done.style.opacity = "1";
+        return;
+
+    }
+
+    routes[index].classList.add("draw");
+
+    moveTruck(
+        points[index],
+        points[index+1],
+        () => {
+
+            cities[index+1].classList.add("active");
+
+            animateRoute(index+1);
+
+        }
+    );
+
 }
 
-function moveTruck(from,to,callback){
+function moveTruck(start,end,callback){
 
-    let x=from.x;
+    const duration = 1200;
 
-    let y=from.y;
+    const startTime = performance.now();
 
-    const dx=(to.x-from.x)/100;
+    const angle =
+        Math.atan2(
+            end.y-start.y,
+            end.x-start.x
+        )*180/Math.PI;
 
-    const dy=(to.y-from.y)/100;
+    truck.style.transform =
+        `translate(-50%,-50%) rotate(${angle}deg)`;
 
-    const angle=Math.atan2(
-        to.y-from.y,
-        to.x-from.x
-    )*180/Math.PI;
+    function frame(time){
 
-    truck.style.transform=
-    `translate(-50%,-50%) rotate(${angle}deg)`;
+        let progress = (time-startTime)/duration;
 
-    let step=0;
+        if(progress>1) progress=1;
 
-    const timer=setInterval(()=>{
+        const x =
+            start.x +
+            (end.x-start.x)*progress;
 
-        x+=dx;
+        const y =
+            start.y +
+            (end.y-start.y)*progress;
 
-        y+=dy;
+        truck.style.left = x+"px";
+        truck.style.top = y+"px";
 
-        truck.style.left=x+"px";
-        truck.style.top=y+"px";
+        if(progress<1){
 
-        step++;
+            requestAnimationFrame(frame);
 
-        if(step>=100){
-
-            clearInterval(timer);
+        }else{
 
             callback();
 
         }
 
-    },15);
-
-}
-
-function startAnimation(){
-
-    truck.style.left=points[0].x+"px";
-    truck.style.top=points[0].y+"px";
-
-    cities[0].classList.add("active");
-
-    let i=0;
-
-    function next(){
-
-        if(i>=routes.length){
-
-            document
-            .getElementById("done")
-            .style.opacity=1;
-
-            return;
-        }
-
-        routes[i].classList.add("draw");
-
-        moveTruck(
-
-            points[i],
-
-            points[i+1],
-
-            ()=>{
-
-                cities[i+1]
-                .classList
-                .add("active");
-
-                i++;
-
-                next();
-
-            }
-
-        );
-
     }
 
-    next();
+    requestAnimationFrame(frame);
 
 }
