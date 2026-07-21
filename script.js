@@ -32,9 +32,9 @@ function startAnimation(){
 
         const svgDoc = svg.contentDocument;
 
-        const path = svgDoc.getElementById("indiaPath");
+        const polygon = svgDoc.getElementById("indiaPolygon");
 
-        const length = path.getTotalLength();
+        const points = polygon.points;
 
         path.style.strokeDasharray = length;
         path.style.strokeDashoffset = length;
