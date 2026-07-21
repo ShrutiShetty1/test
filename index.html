@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Truck Map Animation</title>
+<title>SHUBH LABH DISTRIBUTIONS</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
-  
-  <div id="splash">
 
-    <img src="logo.png" id="logo">
+<!-- ================= SPLASH ================= -->
 
-    <div id="company">
+<div id="splash">
 
-        SHUBH LABH DISTRIBUTIONS
+    <img src="logo.png" id="logo" alt="Logo">
 
-    </div>
+    <h1>SHUBH LABH DISTRIBUTIONS</h1>
 
-    <div id="loading">
-
-        Loading Distribution Network...
-
-    </div>
+    <p>Building India's Distribution Network...</p>
 
     <div class="loader">
-
-        <span></span>
-
+        <div class="progress"></div>
     </div>
-        </div>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+
+<div id="main">
+
+<h2>Delivering Across India</h2>
 
 <div class="container">
 
-  
+<svg id="network"
+     viewBox="0 0 900 600"
+     xmlns="http://www.w3.org/2000/svg">
 
-    <!-- Routes -->
+<!-- ROUTES -->
 
-    <line id="r1" x1="140" y1="120" x2="260" y2="220"/>
+<line id="r1" x1="140" y1="120" x2="260" y2="220"/>
 
-    <line id="r2" x1="260" y1="220" x2="180" y2="320"/>
+<line id="r2" x1="260" y1="220" x2="180" y2="340"/>
 
-    <line id="r3" x1="260" y1="220" x2="420" y2="260"/>
+<line id="r3" x1="260" y1="220" x2="430" y2="260"/>
 
-    <line id="r4" x1="420" y1="260" x2="380" y2="420"/>
+<line id="r4" x1="430" y1="260" x2="380" y2="430"/>
 
-    <line id="r5" x1="380" y1="420" x2="470" y2="500"/>
+<line id="r5" x1="380" y1="430" x2="500" y2="500"/>
 
-    <line id="r6" x1="420" y1="260" x2="700" y2="180"/>
+<line id="r6" x1="430" y1="260" x2="720" y2="170"/>
 
-    <!-- Cities -->
+<!-- CITY DOTS -->
 
-    <circle id="c1" cx="140" cy="120" r="6"/>
-    <circle id="c2" cx="260" cy="220" r="6"/>
-    <circle id="c3" cx="180" cy="320" r="6"/>
-    <circle id="c4" cx="420" cy="260" r="6"/>
-    <circle id="c5" cx="380" cy="420" r="6"/>
-    <circle id="c6" cx="470" cy="500" r="6"/>
-    <circle id="c7" cx="700" cy="180" r="6"/>
+<circle id="c1" cx="140" cy="120" r="7"/>
+<circle id="c2" cx="260" cy="220" r="7"/>
+<circle id="c3" cx="180" cy="340" r="7"/>
+<circle id="c4" cx="430" cy="260" r="7"/>
+<circle id="c5" cx="380" cy="430" r="7"/>
+<circle id="c6" cx="500" cy="500" r="7"/>
+<circle id="c7" cx="720" cy="170" r="7"/>
 
 </svg>
 
-  <img
-        src="truck.png"
-        id="truck"
-        alt="Truck">
-        <svg id="network" viewBox="0 0 900 600">
+<img
+src="truck.png"
+id="truck"
+alt="Truck">
+
+</div>
+
+<div id="done">
+
+Delivering Across India
+
+</div>
+
 </div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
