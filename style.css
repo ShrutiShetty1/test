@@ -1,6 +1,6 @@
-/* ===================================
-   TRUCK NETWORK ANIMATION
-=================================== */
+/* =====================================
+   SHUBH LABH DISTRIBUTIONS
+====================================== */
 
 *{
     margin:0;
@@ -9,28 +9,26 @@
 }
 
 body{
-    overflow:hidden;
+
+    font-family:Segoe UI,sans-serif;
     background:#ffffff;
-    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+
 }
 
-/* ================= Splash Screen ================= */
+/* ================= SPLASH ================= */
 
 #splash{
 
     position:fixed;
-
     inset:0;
 
     background:#ffffff;
 
     display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
     flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
     z-index:9999;
 
@@ -40,67 +38,51 @@ body{
 
 #logo{
 
-    width:140px;
-
-    animation:logoPop 1.2s ease;
+    width:150px;
+    margin-bottom:20px;
 
 }
 
-#company{
+#splash h1{
 
-    margin-top:20px;
-
+    color:#0b3d91;
     font-size:34px;
-
-    font-weight:bold;
-
-    color:#0d47a1;
-
-    letter-spacing:2px;
+    margin-bottom:10px;
 
 }
 
-#loading{
-
-    margin-top:25px;
+#splash p{
 
     color:#666;
-
-    font-size:16px;
+    margin-bottom:25px;
 
 }
 
 .loader{
 
-    width:260px;
+    width:280px;
+    height:10px;
 
-    height:8px;
-
-    background:#e0e0e0;
+    background:#ececec;
 
     border-radius:30px;
-
-    margin-top:18px;
 
     overflow:hidden;
 
 }
 
-.loader span{
-
-    display:block;
+.progress{
 
     width:0;
-
     height:100%;
 
-    background:#1976d2;
+    background:#1565c0;
 
-    animation:loadingBar 3s linear forwards;
+    animation:loading 3s linear forwards;
 
 }
 
-@keyframes loadingBar{
+@keyframes loading{
 
     from{
 
@@ -116,51 +98,54 @@ body{
 
 }
 
-@keyframes logoPop{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.5);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-
-    }
-
-}
-
-/* ================= Main Animation ================= */
+/* ================= MAIN ================= */
 
 #main{
 
     display:none;
 
     width:100vw;
-
     height:100vh;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:#ffffff;
 
 }
 
-/* ================= SVG Network ================= */
+h2{
 
-#network{
+    text-align:center;
+
+    margin-top:35px;
+
+    font-size:48px;
+
+    color:#222;
+
+}
+
+.container{
+
+    position:relative;
 
     width:100%;
 
-    height:100%;
+    height:75vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ================= SVG ================= */
+
+#network{
+
+    width:90%;
+
+    max-width:1000px;
+
+    height:auto;
 
 }
 
@@ -168,7 +153,9 @@ body{
 
     stroke:#1976d2;
 
-    stroke-width:4;
+    stroke-width:5;
+
+    fill:none;
 
     stroke-linecap:round;
 
@@ -180,58 +167,60 @@ body{
 
 #network circle{
 
-    fill:#d9d9d9;
+    fill:#ffffff;
 
     stroke:#1976d2;
 
-    stroke-width:2;
-
-    transition:.4s;
+    stroke-width:4;
 
 }
+
+/* route drawn */
+
+.draw{
+
+    stroke-dashoffset:0;
+
+    transition:stroke-dashoffset 1s linear;
+
+}
+
+/* visited city */
 
 .active{
 
     fill:#1976d2;
 
-    filter:drop-shadow(0 0 10px #42a5f5);
-
 }
 
-/* ================= Truck ================= */
+/* ================= TRUCK ================= */
 
 #truck{
 
     position:absolute;
 
-    width:65px;
+    width:75px;
 
     left:0;
 
     top:0;
 
-    z-index:100;
+    transform:translate(-50%,-50%);
 
-    transform-origin:center center;
+    z-index:50;
 
     transition:left .05s linear,
                top .05s linear;
 
 }
 
-/* ================= Completion ================= */
+/* ================= DONE ================= */
 
 #done{
 
-    position:absolute;
-
-    bottom:40px;
-
-    width:100%;
-
     text-align:center;
 
-    font-size:32px;
+    font-size:34px;
 
     color:#1565c0;
 
@@ -240,5 +229,7 @@ body{
     opacity:0;
 
     transition:1s;
+
+    margin-top:10px;
 
 }
