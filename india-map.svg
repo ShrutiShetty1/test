@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 500 700">
+
+<path
+    id="indiaPath"
+
+    fill="none"
+    stroke="#1976d2"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+
+    d="
+M180 40
+L230 55
+L270 80
+L315 120
+L345 170
+L360 220
+L355 270
+L330 320
+L300 360
+L320 420
+L340 490
+L320 560
+L285 620
+L250 660
+L220 625
+L200 575
+L185 520
+L165 470
+L145 420
+L120 360
+L110 300
+L120 250
+L145 205
+L160 165
+L170 120
+L180 40
+"
+/>
+
+</svg>
