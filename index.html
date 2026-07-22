@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>SHUBH LABH DISTRIBUTIONS</title>
+<title>Truck Drawing Map</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,77 +14,44 @@
 
 <body>
 
-<!-- ================= SPLASH ================= -->
-
 <div id="splash">
-
-    <img src="logo.png" id="logo" alt="Logo">
-
-    <h1>SHUBH LABH DISTRIBUTIONS</h1>
-
-    <p>Building India's Distribution Network...</p>
-
-    <div class="loader">
-        <div class="progress"></div>
-    </div>
-
+    <img src="logo.png" class="logo">
 </div>
 
-<!-- ================= MAIN ================= -->
+<div id="mapContainer">
 
-<div id="main">
+<svg id="indiaSVG"
+viewBox="0 0 400 500">
 
-<h2>Delivering Across India</h2>
-
-<div class="container">
-
-<svg id="network"
-     viewBox="0 0 900 600"
-     xmlns="http://www.w3.org/2000/svg">
-
-<!-- ROUTES -->
-
-<line id="r1" x1="140" y1="120" x2="260" y2="220"/>
-
-<line id="r2" x1="260" y1="220" x2="180" y2="340"/>
-
-<line id="r3" x1="260" y1="220" x2="430" y2="260"/>
-
-<line id="r4" x1="430" y1="260" x2="380" y2="430"/>
-
-<line id="r5" x1="380" y1="430" x2="500" y2="500"/>
-
-<line id="r6" x1="430" y1="260" x2="720" y2="170"/>
-
-<!-- CITY DOTS -->
-
-<circle id="c1" cx="140" cy="120" r="7"/>
-<circle id="c2" cx="260" cy="220" r="7"/>
-<circle id="c3" cx="180" cy="340" r="7"/>
-<circle id="c4" cx="430" cy="260" r="7"/>
-<circle id="c5" cx="380" cy="430" r="7"/>
-<circle id="c6" cx="500" cy="500" r="7"/>
-<circle id="c7" cx="720" cy="170" r="7"/>
+<path id="indiaPath"
+d="M143 32
+L170 25
+L210 40
+L250 65
+L275 100
+L300 150
+L290 210
+L260 250
+L275 320
+L235 410
+L200 470
+L170 445
+L150 380
+L110 300
+L95 240
+L70 180
+L80 120
+L110 70
+Z"/>
 
 </svg>
 
-<img
-src="truck.png"
-id="truck"
-alt="Truck">
-
-</div>
-
-<div id="done">
-
-Delivering Across India
-
-</div>
+<img id="truck"
+src="truck.png">
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
