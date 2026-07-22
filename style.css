@@ -1,235 +1,95 @@
-/* =====================================
-   SHUBH LABH DISTRIBUTIONS
-====================================== */
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
 
-    font-family:Segoe UI,sans-serif;
-    background:#ffffff;
-    overflow:hidden;
+background:white;
+overflow:hidden;
+font-family:Arial;
 
 }
 
-/* ================= SPLASH ================= */
+/* Splash */
 
 #splash{
 
-    position:fixed;
-    inset:0;
-
-    background:#ffffff;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    z-index:9999;
-
-    transition:1s;
+position:fixed;
+width:100%;
+height:100%;
+background:white;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:100;
 
 }
 
-#logo{
+.logo{
 
-    width:150px;
-    margin-bottom:20px;
+width:180px;
 
-}
-
-#splash h1{
-
-    color:#0b3d91;
-    font-size:34px;
-    margin-bottom:10px;
+animation:zoom 2s;
 
 }
 
-#splash p{
+@keyframes zoom{
 
-    color:#666;
-    margin-bottom:25px;
+0%{
+transform:scale(.5);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
 
 }
 
-.loader{
+#mapContainer{
 
-    width:280px;
-    height:10px;
+display:none;
 
-    background:#ececec;
+width:100%;
+height:100vh;
 
-    border-radius:30px;
+display:flex;
+justify-content:center;
+align-items:center;
 
-    overflow:hidden;
-
-}
-
-.progress{
-
-    width:0;
-    height:100%;
-
-    background:#1565c0;
-
-    animation:loading 3s linear forwards;
+position:relative;
 
 }
 
-@keyframes loading{
+#indiaSVG{
 
-    from{
-
-        width:0;
-
-    }
-
-    to{
-
-        width:100%;
-
-    }
+width:350px;
 
 }
 
-/* ================= MAIN ================= */
+#indiaPath{
 
-#main{
+fill:none;
 
-    display:none;
+stroke:#1a237e;
 
-    width:100vw;
-    height:100vh;
+stroke-width:4;
 
-}
+stroke-linecap:round;
 
-h2{
-
-    text-align:center;
-
-    margin-top:35px;
-
-    font-size:48px;
-
-    color:#222;
+stroke-linejoin:round;
 
 }
-
-.container{
-
-    position:relative;
-
-    width:100%;
-
-    height:75vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-/* ================= SVG ================= */
-
-#network{
-
-    width:90%;
-
-    max-width:1000px;
-
-    height:auto;
-
-}
-
-#network line{
-
-    stroke:#1976d2;
-
-    stroke-width:5;
-
-    fill:none;
-
-    stroke-linecap:round;
-
-    stroke-dasharray:1000;
-
-    stroke-dashoffset:1000;
-
-}
-
-#network circle{
-
-    fill:#ffffff;
-
-    stroke:#1976d2;
-
-    stroke-width:4;
-
-}
-
-/* route drawn */
-
-.draw{
-
-    stroke-dashoffset:0;
-
-    transition:stroke-dashoffset 1s linear;
-
-}
-
-/* visited city */
-
-.active{
-
-    fill:#1976d2;
-
-}
-
-/* ================= TRUCK ================= */
 
 #truck{
 
-    position:absolute;
+position:absolute;
 
-    width:75px;
+width:55px;
 
-    left:0;
-
-    top:0;
-
-    transform:translate(-50%,-50%);
-
-    z-index:50;
-
-    transition:left .05s linear,
-               top .05s linear;
-
-}
-
-/* ================= DONE ================= */
-
-#done{
-
-    text-align:center;
-
-    font-size:34px;
-
-    color:#1565c0;
-
-    font-weight:bold;
-
-    opacity:0;
-
-    transition:1s;
-
-    margin-top:10px;
+transition:0.05s linear;
 
 }
