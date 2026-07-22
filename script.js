@@ -1,71 +1,109 @@
-const splash=document.getElementById("splash");
-const container=document.getElementById("mapContainer");
+// ===========================
+// Splash Screen
+// ===========================
 
-setTimeout(()=>{
+const splash = document.getElementById("splash");
+const mapIntro = document.getElementById("mapIntro");
+const companyText = document.getElementById("companyText");
 
-splash.style.display="none";
-container.style.display="flex";
+setTimeout(() => {
 
-startAnimation();
+    splash.style.display = "none";
+    mapIntro.style.display = "flex";
 
-},2000);
+    loadAnimation();
+
+}, 2000);
 
 
-function startAnimation(){
+// ===========================
+// Truck Animation
+// ===========================
 
-const path=document.getElementById("indiaPath");
+function loadAnimation() {
 
-const truck=document.getElementById("truck");
+    const object = document.getElementById("indiaMap");
 
-const length=path.getTotalLength();
+    object.addEventListener("load", function () {
 
-path.style.strokeDasharray=length;
-path.style.strokeDashoffset=length;
+        const svg = object.contentDocument;
 
-let progress=0;
+        const path = svg.getElementById("indiaPath");
 
-const speed=2;
+        if (!path) {
+            alert("indiaPath not found inside india.svg");
+            return;
+        }
 
-function animate(){
+        const truck = document.getElementById("truck");
 
-progress+=speed;
+        const totalLength = path.getTotalLength();
 
-path.style.strokeDashoffset=length-progress;
+        path.style.fill = "none";
+        path.style.stroke = "#0A4FAF";
+        path.style.strokeWidth = "4";
+        path.style.strokeDasharray = totalLength;
+        path.style.strokeDashoffset = totalLength;
 
-const point=path.getPointAtLength(progress);
+        let progress = 0;
+        const speed = 2;
 
-truck.style.left=(point.x+20)+"px";
-truck.style.top=(point.y+20)+"px";
+        function animate() {
 
-const next=path.getPointAtLength(
-Math.min(progress+1,length)
-);
+            progress += speed;
 
-const angle=Math.atan2(
-next.y-point.y,
-next.x-point.x
-);
+            if (progress > totalLength)
+                progress = totalLength;
 
-truck.style.transform=
-`translate(-50%,-50%)
-rotate(${angle*180/Math.PI}deg)`;
+            // Draw line
+            path.style.strokeDashoffset = totalLength - progress;
 
-if(progress<length){
+            // Current point
+            const pt = path.getPointAtLength(progress);
 
-requestAnimationFrame(animate);
+            // Next point (for angle)
+            const next = path.getPointAtLength(
+                Math.min(progress + 1, totalLength)
+            );
 
-}else{
+            const rect = object.getBoundingClientRect();
 
-setTimeout(()=>{
+            truck.style.left =
+                (rect.left + pt.x * rect.width / 400) + "px";
 
-window.location="home.html";
+            truck.style.top =
+                (rect.top + pt.y * rect.height / 500) + "px";
 
-},1000);
+            const angle = Math.atan2(
+                next.y - pt.y,
+                next.x - pt.x
+            ) * 180 / Math.PI;
 
-}
+            truck.style.transform =
+                "translate(-50%,-50%) rotate(" +
+                angle +
+                "deg)";
 
-}
+            if (progress < totalLength) {
 
-animate();
+                requestAnimationFrame(animate);
+
+            } else {
+
+                companyText.style.opacity = 1;
+
+                setTimeout(function () {
+
+                    window.location.href = "home.html";
+
+                }, 3000);
+
+            }
+
+        }
+
+        animate();
+
+    });
 
 }
