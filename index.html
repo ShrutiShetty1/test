@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Truck Drawing Map</title>
+<title>SHUBH LABH DISTRIBUTIONS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,44 +14,48 @@ content="width=device-width, initial-scale=1.0">
 
 <body>
 
+<!-- Splash Screen -->
+
 <div id="splash">
-    <img src="logo.png" class="logo">
-</div>
 
-<div id="mapContainer">
-
-<svg id="indiaSVG"
-viewBox="0 0 400 500">
-
-<path id="indiaPath"
-d="M143 32
-L170 25
-L210 40
-L250 65
-L275 100
-L300 150
-L290 210
-L260 250
-L275 320
-L235 410
-L200 470
-L170 445
-L150 380
-L110 300
-L95 240
-L70 180
-L80 120
-L110 70
-Z"/>
-
-</svg>
-
-<img id="truck"
-src="truck.png">
+    <img src="logo.png" id="logo">
 
 </div>
+
+<!-- Map Animation -->
+
+<section id="mapIntro">
+
+    <div id="animationContainer">
+
+        <!-- India SVG will be loaded here -->
+        <object id="indiaMap"
+                data="india.svg"
+                type="image/svg+xml">
+        </object>
+
+        <!-- Truck -->
+
+        <img src="truck.png"
+             id="truck"
+             alt="Truck">
+
+        <!-- Company Name -->
+
+        <div id="companyText">
+
+            <h1>SHUBH LABH DISTRIBUTIONS</h1>
+
+            <p>Delivering Across India</p>
+
+        </div>
+
+    </div>
+
+</section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
