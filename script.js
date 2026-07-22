@@ -1,131 +1,71 @@
-const splash = document.getElementById("splash");
-const main = document.getElementById("main");
+const splash=document.getElementById("splash");
+const container=document.getElementById("mapContainer");
 
-const truck = document.getElementById("truck");
-const done = document.getElementById("done");
+setTimeout(()=>{
 
-const routes = [
-    document.getElementById("r1"),
-    document.getElementById("r2"),
-    document.getElementById("r3"),
-    document.getElementById("r4"),
-    document.getElementById("r5"),
-    document.getElementById("r6")
-];
+splash.style.display="none";
+container.style.display="flex";
 
-const cities = [
-    document.getElementById("c1"),
-    document.getElementById("c2"),
-    document.getElementById("c3"),
-    document.getElementById("c4"),
-    document.getElementById("c5"),
-    document.getElementById("c6"),
-    document.getElementById("c7")
-];
+startAnimation();
 
-const points = [
-    {x:140,y:120},
-    {x:260,y:220},
-    {x:180,y:340},
-    {x:430,y:260},
-    {x:380,y:430},
-    {x:500,y:500},
-    {x:720,y:170}
-];
+},2000);
 
-window.onload = () => {
 
-    setTimeout(() => {
+function startAnimation(){
 
-        splash.style.opacity = "0";
+const path=document.getElementById("indiaPath");
 
-        setTimeout(() => {
+const truck=document.getElementById("truck");
 
-            splash.style.display = "none";
-            main.style.display = "block";
+const length=path.getTotalLength();
 
-            truck.style.left = points[0].x + "px";
-            truck.style.top = points[0].y + "px";
+path.style.strokeDasharray=length;
+path.style.strokeDashoffset=length;
 
-            cities[0].classList.add("active");
+let progress=0;
 
-            animateRoute(0);
+const speed=2;
 
-        },1000);
+function animate(){
 
-    },3000);
+progress+=speed;
 
-};
+path.style.strokeDashoffset=length-progress;
 
-function animateRoute(index){
+const point=path.getPointAtLength(progress);
 
-    if(index >= routes.length){
+truck.style.left=(point.x+20)+"px";
+truck.style.top=(point.y+20)+"px";
 
-        done.style.opacity = "1";
-        return;
+const next=path.getPointAtLength(
+Math.min(progress+1,length)
+);
 
-    }
+const angle=Math.atan2(
+next.y-point.y,
+next.x-point.x
+);
 
-    routes[index].classList.add("draw");
+truck.style.transform=
+`translate(-50%,-50%)
+rotate(${angle*180/Math.PI}deg)`;
 
-    moveTruck(
-        points[index],
-        points[index+1],
-        () => {
+if(progress<length){
 
-            cities[index+1].classList.add("active");
+requestAnimationFrame(animate);
 
-            animateRoute(index+1);
+}else{
 
-        }
-    );
+setTimeout(()=>{
+
+window.location="home.html";
+
+},1000);
 
 }
 
-function moveTruck(start,end,callback){
+}
 
-    const duration = 1200;
-
-    const startTime = performance.now();
-
-    const angle =
-        Math.atan2(
-            end.y-start.y,
-            end.x-start.x
-        )*180/Math.PI;
-
-    truck.style.transform =
-        `translate(-50%,-50%) rotate(${angle}deg)`;
-
-    function frame(time){
-
-        let progress = (time-startTime)/duration;
-
-        if(progress>1) progress=1;
-
-        const x =
-            start.x +
-            (end.x-start.x)*progress;
-
-        const y =
-            start.y +
-            (end.y-start.y)*progress;
-
-        truck.style.left = x+"px";
-        truck.style.top = y+"px";
-
-        if(progress<1){
-
-            requestAnimationFrame(frame);
-
-        }else{
-
-            callback();
-
-        }
-
-    }
-
-    requestAnimationFrame(frame);
+animate();
 
 }
