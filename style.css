@@ -8,169 +8,178 @@
     box-sizing:border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
+body{
     overflow:hidden;
     font-family:Poppins,Arial,sans-serif;
     background:#ffffff;
 }
 
 /* ===========================
-   SPLASH SCREEN
+   SPLASH
 =========================== */
 
 #splash{
     position:fixed;
     inset:0;
-    background:#fff;
+    background:#ffffff;
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:9999;
+    flex-direction:column;
+    z-index:1000;
+    animation:hideSplash 2s forwards;
+    animation-delay:2s;
 }
 
-#logo{
-    width:220px;
-    max-width:70%;
-    animation:logoZoom 2s ease;
+.logo{
+    width:150px;
 }
 
-@keyframes logoZoom{
-
-0%{
-transform:scale(.5);
-opacity:0;
+.logo-container h1{
+    margin-top:20px;
+    color:#0b4b8c;
+    font-size:32px;
+    letter-spacing:2px;
 }
 
-100%{
-transform:scale(1);
-opacity:1;
+/* ===========================
+   INTRO
+=========================== */
+
+#intro{
+
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:white;
+
+    opacity:0;
+
+    animation:showIntro .8s forwards;
+    animation-delay:2.2s;
 }
+
+/* ===========================
+   INDIA SVG
+=========================== */
+
+#indiaSVG{
+
+    width:65vw;
+    max-width:700px;
+    height:auto;
+
+}
+
+#indiaOutline{
+
+    fill:none;
+
+    stroke:#FF9933;
+
+    stroke-width:1.4;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
 
 }
 
 /* ===========================
-   MAP
+   TRUCK
 =========================== */
-
-#mapIntro{
-
-display:none;
-
-position:fixed;
-inset:0;
-
-background:#fff;
-
-justify-content:center;
-align-items:center;
-
-}
-
-#animationContainer{
-
-position:relative;
-
-width:100%;
-height:100%;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-}
-
-#indiaMap{
-
-width:70vw;
-max-width:650px;
-height:auto;
-
-}
-
-/* Truck */
 
 #truck{
 
-position:absolute;
+    position:absolute;
 
-width:70px;
+    width:70px;
 
-left:0;
-top:0;
+    left:50%;
 
-z-index:5;
+    top:80%;
 
-transform-origin:center center;
+    transform:translate(-50%,-50%);
 
-transition:transform .05s linear;
+    z-index:10;
 
-}
-
-/* Company Text */
-
-#companyText{
-
-position:absolute;
-
-bottom:70px;
-
-text-align:center;
-
-opacity:0;
-
-transition:1s;
+    transition:transform .1s linear;
 
 }
 
-#companyText h1{
+/* ===========================
+   HOME PAGE
+=========================== */
 
-font-size:40px;
+#homepage{
 
-color:#082d72;
+    position:fixed;
 
-letter-spacing:2px;
+    inset:0;
 
-}
+    background:white;
 
-#companyText p{
+    opacity:0;
 
-margin-top:12px;
+    pointer-events:none;
 
-font-size:20px;
-
-color:#d39b17;
-
-font-weight:600;
+    transition:1s;
 
 }
 
-/* Mobile */
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes hideSplash{
+
+    to{
+
+        opacity:0;
+
+        visibility:hidden;
+
+    }
+
+}
+
+@keyframes showIntro{
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
 
 @media(max-width:768px){
 
-#indiaMap{
+.logo{
+    width:110px;
+}
 
-width:90vw;
+.logo-container h1{
+    font-size:22px;
+}
+
+#indiaSVG{
+
+    width:92vw;
 
 }
 
 #truck{
 
-width:48px;
-
-}
-
-#companyText h1{
-
-font-size:24px;
-
-}
-
-#companyText p{
-
-font-size:16px;
+    width:45px;
 
 }
 
