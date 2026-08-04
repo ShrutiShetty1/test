@@ -30,12 +30,12 @@ function moveTruck() {
     if (index >= pts.numberOfItems) {
 
         // Show tricolor
-        document.querySelectorAll(".flag").forEach(flag => {
+        /*document.querySelectorAll(".flag").forEach(flag => {
             flag.style.opacity = "1";
         });
 
         // Hide outline
-        polygon.style.stroke = "transparent";
+        polygon.style.stroke = "transparent";*/
 
         setTimeout(() => {
 
