@@ -28,6 +28,9 @@ let index = 0;
 function moveTruck() {
 
     if (index >= pts.numberOfItems) {
+        
+        polygon.style.fill = "#138808";
+polygon.style.transition = "fill 1.5s ease";
 
         // Show tricolor
         /*document.querySelectorAll(".flag").forEach(flag => {
@@ -88,7 +91,7 @@ function moveTruck() {
     index++;
 
     // Continue animation
-    setTimeout(moveTruck, 30);
+    setTimeout(moveTruck, 100);
 }
 
 
