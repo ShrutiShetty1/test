@@ -90,8 +90,10 @@ polygon.style.transition = "fill 1.5s ease";
 
     index++;
 
-    // Continue animation
-    setTimeout(moveTruck, 100);
+// Slow down truck by changing the delay
+setTimeout(function () {
+    moveTruck();
+}, 150);
 }
 
 
