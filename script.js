@@ -81,8 +81,14 @@ polygon.style.transition = "fill 1.5s ease";
     truck.style.left = x + "px";
     truck.style.top = y + "px";
 
-    truck.style.transform =
-        `translate(-50%, -50%) rotate(${angle}deg)`;
+    if (!window.currentAngle) {
+    window.currentAngle = angle;
+}
+
+window.currentAngle += (angle - window.currentAngle) * 0.15;
+
+truck.style.transform =
+`translate(-50%, -50%) rotate(${window.currentAngle}deg)`;
 
     // Draw outline
     polygon.style.strokeDashoffset =
