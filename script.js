@@ -66,8 +66,19 @@ function moveTruck() {
     const x = rect.left + (p.x / 241) * rect.width;
     const y = rect.top + (p.y / 260) * rect.height;
 
-    truck.style.left = x + "px";
-    truck.style.top = y + "px";
+    const next = pts.getItem((index + 1) % pts.numberOfItems);
+
+const angle =
+    Math.atan2(
+        next.y - p.y,
+        next.x - p.x
+    ) * 180 / Math.PI;
+
+truck.style.left = x + "px";
+truck.style.top = y + "px";
+
+truck.style.transform =
+    `translate(-50%, -50%) rotate(${angle}deg)`;
 
     polygon.style.strokeDashoffset =
         totalLength - ((index / pts.numberOfItems) * totalLength);
