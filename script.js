@@ -29,17 +29,33 @@ function moveTruck() {
 
     if(index >= pts.numberOfItems){
 
-        polygon.style.fill = "#FFFFFF";
+    // Show the tricolor
+    document.querySelectorAll(".flag").forEach(f => {
+        f.style.opacity = 1;
+    });
+
+    // Hide the orange outline
+    polygon.style.stroke = "transparent";
+
+    setTimeout(() => {
+
+        intro.style.opacity = 0;
 
         setTimeout(() => {
 
-            polygon.style.fill = "#138808";
+            intro.style.display = "none";
 
-        },600);
+            homepage.style.opacity = 1;
+            homepage.style.pointerEvents = "auto";
 
-        setTimeout(() => {
+            document.body.style.overflow = "auto";
 
-            intro.style.opacity = 0;
+        },800);
+
+    },2000);
+
+    return;
+}
 
             setTimeout(() => {
 
