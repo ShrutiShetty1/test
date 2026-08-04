@@ -47,46 +47,38 @@ body{
 =========================== */
 
 #intro{
-
     position:fixed;
     inset:0;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
-    background:white;
-
-    opacity:0;
-
-    animation:showIntro .8s forwards;
-    animation-delay:2.2s;
+    background:#ffffff;
+    overflow:hidden;
+    z-index:999;
 }
 
 /* ===========================
-   INDIA SVG
+   INDIA MAP
 =========================== */
 
 #indiaSVG{
-
-    width:65vw;
+    width:75vw;
     max-width:700px;
     height:auto;
-
 }
 
-#indiaOutline{
-
+#indiaPath{
     fill:none;
-
     stroke:#FF9933;
-
-    stroke-width:1.4;
-
+    stroke-width:3;
     stroke-linecap:round;
-
     stroke-linejoin:round;
+}
 
+/* Hide tricolor initially */
+#indiaFill{
+    opacity:0;
+    transition:opacity 1.5s ease;
 }
 
 /* ===========================
@@ -94,41 +86,38 @@ body{
 =========================== */
 
 #truck{
-
     position:absolute;
+    width:110px;
+    left:0;
+    top:0;
+    z-index:20;
+    transform-origin:center center;
+    will-change:transform,left,top;
+}
 
-    width:170px;
+/* Mobile */
+@media(max-width:768px){
 
-    left:50%;
+    #indiaSVG{
+        width:92vw;
+    }
 
-    top:80%;
-
-    transform:translate(-50%,-50%);
-
-    z-index:10;
-
-    transition:transform .1s linear;
-
+    #truck{
+        width:75px;
+    }
 }
 
 /* ===========================
-   HOME PAGE
+   HOMEPAGE
 =========================== */
 
 #homepage{
-
     position:fixed;
-
     inset:0;
-
-    background:white;
-
     opacity:0;
-
     pointer-events:none;
-
-    transition:1s;
-
+    transition:opacity 1s ease;
+    background:#fff;
 }
 
 /* ===========================
