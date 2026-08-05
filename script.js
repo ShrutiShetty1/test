@@ -116,8 +116,8 @@ function moveTruck() {
     const rect = svg.getBoundingClientRect();
 
     // Convert SVG coordinates to screen coordinates
-    const x = rect.left + (p.x / 241) * rect.width;
-    const y = rect.top + (p.y / 260) * rect.height;
+    const x = rect.left + window.scrollX + (p.x / 241) * rect.width;
+const y = rect.top + window.scrollY + (p.y / 260) * rect.height;
 
     // Calculate truck angle
     const targetAngle =
