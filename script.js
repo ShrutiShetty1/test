@@ -109,14 +109,17 @@ setTimeout(() => {
 
                 intro.style.display = "none";
 
-                homepage.style.opacity = "1";
-                homepage.style.pointerEvents = "auto";
+                homepage.style.visibility = "visible";
 
-                document.body.style.overflow = "auto";
+        homepage.style.opacity = "1";
 
-            }, 800);
+        homepage.style.pointerEvents = "auto"
 
-        }, 1500);
+                //document.body.style.overflow = "auto";
+
+            }, 1200);
+
+        }, 3000);
 
         return;
     }
