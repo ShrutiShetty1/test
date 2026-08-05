@@ -67,7 +67,7 @@ path.style.strokeDashoffset = totalLength;
 let distance = 0;
 let currentAngle = 0;
 
-const speed = 1.2;
+const speed = 0.8;
 /* ===========================
    MOVE TRUCK
 =========================== */
@@ -109,7 +109,7 @@ function moveTruck() {
 
     // Next point
     const next = path.getPointAtLength(
-        Math.min(distance + 2, totalLength)
+        Math.min(distance + 8, totalLength)
     );
 
     const svg = document.getElementById("indiaSVG");
@@ -132,7 +132,7 @@ const y = rect.top + window.scrollY + (p.y / 260) * rect.height;
     if (diff < -180) diff += 360;
 
     // Smooth rotation
-    currentAngle += diff * 0.15;
+    currentAngle += diff * 0.08;
 
     // Move truck
     truck.style.left = x + "px";
