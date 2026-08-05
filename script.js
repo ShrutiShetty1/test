@@ -142,11 +142,17 @@ const y = rect.top + window.scrollY + (p.y / 260) * rect.height;
         `translate(-50%, -50%) rotate(${currentAngle}deg)`;
 
     // Draw outline gradually
-    path.style.strokeDashoffset =
-        totalLength - distance;
+    const drawOffset = Math.max(totalLength - distance - 15, 0);
+path.style.strokeDashoffset = drawOffset;
 
     // Move forward
-    distance += speed;
+    let curveSpeed = speed;
+
+if (Math.abs(diff) > 20) {
+    curveSpeed = speed * 0.7; // Slow down at sharper turns
+}
+
+distance += curveSpeed;
 
     requestAnimationFrame(moveTruck);
 }
