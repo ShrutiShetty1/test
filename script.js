@@ -83,6 +83,12 @@ function moveTruck() {
     });
 }, 300);
 
+setTimeout(() => {
+
+    document.getElementById("chakra").style.opacity = "1";
+
+}, 600);
+
         // Hide orange outline
         path.style.stroke = "transparent";
 
