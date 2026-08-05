@@ -62,8 +62,8 @@ body{
 =========================== */
 
 #indiaSVG{
-    width:75vw;
-    max-width:700px;
+    width:min(70vw, 650px);
+    max-height:80vh;
     height:auto;
 }
 
