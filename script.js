@@ -151,8 +151,11 @@ function moveTruck() {
    START
 =========================== */
 
+// Prepare the path for drawing
+path.style.strokeDasharray = totalLength;
+path.style.strokeDashoffset = totalLength;
+
+// Start truck after splash screen
 setTimeout(() => {
-
     moveTruck();
-
-},2500);
+}, 2500);
