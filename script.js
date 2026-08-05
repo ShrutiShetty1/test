@@ -9,98 +9,142 @@ const homepage = document.getElementById("homepage");
 const truck = document.getElementById("truck");
 const polygon = document.getElementById("indiaOutline");
 
+// Convert polygon to SVG path
+function polygonToPath(poly) {
+
+    const pts = poly.points;
+
+    let d = "";
+
+    for (let i = 0; i < pts.numberOfItems; i++) {
+
+        const p = pts.getItem(i);
+
+        if (i === 0)
+            d += `M ${p.x} ${p.y}`;
+        else
+            d += ` L ${p.x} ${p.y}`;
+    }
+
+    d += " Z";
+
+    const path =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#FF9933");
+    path.setAttribute("stroke-width", "2");
+
+    poly.parentNode.replaceChild(path, poly);
+
+    return path;
+}
+
+const path = polygonToPath(polygon);
+
 /* ===========================
    DRAW ANIMATION
 =========================== */
 
-const totalLength = polygon.getTotalLength();
+const totalLength = path.getTotalLength();
 
-polygon.style.strokeDasharray = totalLength;
-polygon.style.strokeDashoffset = totalLength;
+path.style.strokeDasharray = totalLength;
+path.style.strokeDashoffset = totalLength;
 
 /* ===========================
    GET POLYGON POINTS
 =========================== */
 
-const pts = polygon.points;
+const pts = path.points;
 let index = 0;
 
 function moveTruck() {
 
-    if (index >= pts.numberOfItems) {
-        
-        polygon.style.fill = "#138808";
-polygon.style.transition = "fill 1.5s ease";
+    let distance = 0;
+let currentAngle = 0;
+const speed = 1.2; // Increase to 2 or 3 for faster truck
+
+function moveTruck() {
+
+    if (distance >= totalLength) {
 
         // Show tricolor
-        /*document.querySelectorAll(".flag").forEach(flag => {
-            flag.style.opacity = "1";
+        document.querySelectorAll(".flag").forEach(f => {
+            f.style.opacity = 1;
         });
 
-        // Hide outline
-        polygon.style.stroke = "transparent";*/
+        // Hide orange outline
+        path.style.stroke = "transparent";
 
         setTimeout(() => {
 
-            intro.style.opacity = "0";
+            intro.style.opacity = 0;
 
             setTimeout(() => {
 
                 intro.style.display = "none";
 
-                homepage.style.opacity = "1";
+                homepage.style.opacity = 1;
                 homepage.style.pointerEvents = "auto";
-
                 document.body.style.overflow = "auto";
 
             }, 800);
 
-        }, 2000);
+        }, 1500);
 
         return;
     }
 
-    // Current point
-    const p = pts.getItem(index);
+    // Current position
+    const p = path.getPointAtLength(distance);
 
-    // Next point (for rotation)
-    const next = pts.getItem((index + 1) % pts.numberOfItems);
+    // Look slightly ahead for smoother rotation
+    const next = path.getPointAtLength(
+        Math.min(distance + 5, totalLength)
+    );
 
+    // Convert SVG coordinates to screen coordinates
     const svg = document.getElementById("indiaSVG");
     const rect = svg.getBoundingClientRect();
 
     const x = rect.left + (p.x / 241) * rect.width;
     const y = rect.top + (p.y / 260) * rect.height;
 
-    const angle =
+    // Calculate angle
+    const targetAngle =
         Math.atan2(
             next.y - p.y,
             next.x - p.x
         ) * 180 / Math.PI;
 
+    let diff = targetAngle - currentAngle;
+
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+
+    // Smooth rotation
+    currentAngle += diff * 0.12;
+
+    // Move truck
     truck.style.left = x + "px";
     truck.style.top = y + "px";
-
-    if (!window.currentAngle) {
-    window.currentAngle = angle;
-}
-
-window.currentAngle += (angle - window.currentAngle) * 0.15;
-
-truck.style.transform =
-`translate(-50%, -50%) rotate(${window.currentAngle}deg)`;
+    truck.style.transform =
+        `translate(-50%, -50%) rotate(${currentAngle}deg)`;
 
     // Draw outline
-    polygon.style.strokeDashoffset =
-        totalLength - ((index / pts.numberOfItems) * totalLength);
+    path.style.strokeDashoffset = totalLength - distance;
 
-    index++;
+    distance += speed;
 
-// Slow down truck by changing the delay
-setTimeout(function () {
-    moveTruck();
-}, 150);
+    requestAnimationFrame(moveTruck);
 }
+            
+
+    
 
 
 /* ===========================
