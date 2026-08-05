@@ -67,7 +67,10 @@ path.style.strokeDashoffset = totalLength;
 let distance = 0;
 let currentAngle = 0;
 
-const speed = 0.8;
+const speed =
+    window.innerWidth < 768
+        ? 2.2
+        : 0.8;
 /* ===========================
    MOVE TRUCK
 =========================== */
@@ -160,7 +163,9 @@ if (Math.abs(diff) > 20) {
     curveSpeed = speed * 0.7; // Slow down at sharper turns
 }
 
-distance += curveSpeed;
+distance += curveSpeed * (
+    window.innerWidth < 768 ? 2.5 : 1
+);
 
     requestAnimationFrame(moveTruck);
 }
