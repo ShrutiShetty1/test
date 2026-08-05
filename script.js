@@ -164,7 +164,7 @@ if (Math.abs(diff) > 20) {
 }
 
 distance += curveSpeed * (
-    window.innerWidth < 768 ? 2.5 : 1
+    window.innerWidth < 768 ? 1.3 : 1
 );
 
     requestAnimationFrame(moveTruck);
