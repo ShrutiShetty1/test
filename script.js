@@ -92,6 +92,12 @@ setTimeout(() => {
 
 }, 600);
 
+setTimeout(() => {
+
+    document.getElementById("tagline").style.opacity = "1";
+
+}, 600);
+
         // Hide orange outline
         path.style.stroke = "transparent";
 
