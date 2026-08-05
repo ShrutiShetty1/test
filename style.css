@@ -176,5 +176,9 @@ body{
     opacity:0;
     transition:opacity 1.5s ease;
 }
+#chakra{
+    opacity:0;
+    transition:opacity 1.5s ease;
+}
 
 
