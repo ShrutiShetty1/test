@@ -87,10 +87,9 @@ body{
 
 #truck{
     position:absolute;
-    width:110px;
-    left:0;
-    top:0;
+    width:90px;
     z-index:20;
+    transform:translate(-50%,-50%);
     transform-origin:center center;
     will-change:transform,left,top;
 }
@@ -103,7 +102,7 @@ body{
     }
 
     #truck{
-        width:75px;
+        width:60px;
     }
 }
 
