@@ -77,9 +77,11 @@ function moveTruck() {
     if (distance >= totalLength) {
 
         // Show tricolor (if you add it later)
-        document.querySelectorAll(".flag").forEach(flag => {
-            flag.style.opacity = 1;
-        });
+        setTimeout(() => {
+    document.querySelectorAll(".flag").forEach(flag => {
+        flag.style.opacity = "1";
+    });
+}, 300);
 
         // Hide orange outline
         path.style.stroke = "transparent";
