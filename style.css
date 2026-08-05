@@ -181,4 +181,27 @@ body{
     transition:opacity 1.5s ease;
 }
 
+#tagline{
+    position:absolute;
+    bottom:8%;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:34px;
+    font-weight:700;
+    color:#0B4B8C;
+    opacity:0;
+    transition:opacity 1.2s ease;
+    text-align:center;
+    letter-spacing:1px;
+}
+
+@media (max-width:768px){
+
+    #tagline{
+        font-size:20px;
+        width:90%;
+    }
+
+}
+
 
